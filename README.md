@@ -1,4 +1,4 @@
-## [Download latest release](https://github.com/dantmnf/i1d3_hook/releases/latest/download/i1d3_hook.dll)
+## [Download latest release](https://github.com/dantmnf/i1d3_hook/releases/latest/download/i1d3_hook.zip)
 
 # About
 This DLL allows you to use (almost) any branded OEM variant of the i1Display Pro with most (?) Windows software that supports the i1Display Pro colorimeter. It works by hooking some of the functions provided by the official i1D3 SDK to provide the right unlock code and make it look like the generic OEM variant.
