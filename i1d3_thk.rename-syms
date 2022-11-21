@@ -1,0 +1,10 @@
+_i1d3DeviceOpen _orig_i1d3DeviceOpen
+_i1d3GetSerialNumber _orig_i1d3GetSerialNumber
+_i1d3OverrideDeviceDefaults _orig_i1d3OverrideDeviceDefaults
+__imp__i1d3DeviceOpen __imp__orig_i1d3DeviceOpen
+__imp__i1d3GetSerialNumber __imp__orig_i1d3GetSerialNumber
+__imp__i1d3OverrideDeviceDefaults __imp__orig_i1d3OverrideDeviceDefaults
+?i1d3MeasureAnalogSensorSingle@@YA?AW4i1d3Status_t@@PAXPAG@Z _i1d3MeasureAnalogSensorSingle
+__imp_?i1d3MeasureAnalogSensorSingle@@YA?AW4i1d3Status_t@@PAXPAG@Z __imp__i1d3MeasureAnalogSensorSingle
+?i1d3FCTOpen@@YA?AW4i1d3Status_t@@PAX@Z _i1d3FCTOpen
+__imp_?i1d3FCTOpen@@YA?AW4i1d3Status_t@@PAX@Z __imp__i1d3FCTOpen
