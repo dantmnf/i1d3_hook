@@ -1,0 +1,37 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build-i686:
+    runs-on: windows-2022
+    steps:
+    - uses: actions/checkout@v3
+    - uses: msys2/setup-msys2@v2
+      with:
+        msystem: MINGW32
+        update: true
+        install: mingw-w64-i686-toolchain zip
+    - name: build tool
+      shell: msys2 {0}
+      run: |
+        make i1d3_hook.dll
+        zip -fz i1d3_hook.zip i1d3_hook.dll
+    - name: artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: i1d3_hook
+        # Directory containing files to upload
+        path: i1d3_hook.dll
+    - name: release
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: false
+        title: "Automatic Build"
+        files: |
+          i1d3_hook.zip
