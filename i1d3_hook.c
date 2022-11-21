@@ -4,7 +4,7 @@
 
 // unlock codes as specified in ArgyllCMS source (i1d3.c)
 uint64_t codes[] = {0xe9622e9f8d63e133, 0xe01e6e0a257462de, 0xcaa62b2c30815b61, 0xa91194795b168761, 0x160eb6ae14440e70,
-                    0x291e41d751937bdd, 0x1abfae03f25ac8e8, 0x828c43e9cbb8a8ed};
+                    0x291e41d751937bdd, 0x1abfae03f25ac8e8, 0x828c43e9cbb8a8ed, 0xe8d1a980d146f7ad, 0x64d8c5464b24b4a7};
 
 // spoof generic OEM variant of i1d3
 char *spoofed_variant = "OE";
