@@ -52,14 +52,27 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD fdwReason, LPVOID lpReserved) {
 
             // convert unlock codes to format used by i1d3 SDK
             for (int i = 0; i < sizeof(codes) / sizeof(codes[0]); i++) {
-                uint64_t *code = &codes[i];
+                union {
+                    uint64_t u64;
+                    int32_t  i32[2];
+                    uint8_t  u8[8];
+                } x1, x2;
 
-                uint64_t tmp = ((uint64_t) -((uint32_t *) code)[1] << 32) | -((uint32_t *) code)[0];
-                uint8_t *low = (uint8_t *) &tmp;
-                uint8_t *high = low + 4;
+                x1.u64 = codes[i];
 
-                *code = (uint64_t) (low[3] << 24 | high[3] << 16 | low[2] << 8 | high[2]) << 32 |
-                        (uint32_t) (low[1] << 24 | high[1] << 16 | low[0] << 8 | high[0]);
+                x1.i32[0] = -x1.i32[0];
+                x1.i32[1] = -x1.i32[1];
+
+                x2.u8[0] = x1.u8[4];
+                x2.u8[1] = x1.u8[0];
+                x2.u8[2] = x1.u8[5];
+                x2.u8[3] = x1.u8[1];
+                x2.u8[4] = x1.u8[6];
+                x2.u8[5] = x1.u8[2];
+                x2.u8[6] = x1.u8[7];
+                x2.u8[7] = x1.u8[3];
+
+                codes[i] = x2.u64;
             }
             break;
         }
