@@ -9,7 +9,7 @@ jobs:
   build-i686:
     runs-on: windows-2022
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
     - uses: msys2/setup-msys2@v2
       with:
         msystem: MINGW32
@@ -19,13 +19,46 @@ jobs:
       shell: msys2 {0}
       run: |
         make i1d3_hook.dll
-        zip -fz i1d3_hook.zip i1d3_hook.dll
     - name: artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v4
       with:
         name: i1d3_hook
         # Directory containing files to upload
         path: i1d3_hook.dll
+  build-x86_64:
+    runs-on: windows-2022
+    steps:
+    - uses: actions/checkout@v5
+    - uses: msys2/setup-msys2@v2
+      with:
+        msystem: MINGW64
+        update: true
+        install: mingw-w64-x86_64-toolchain zip make
+    - name: build tool
+      shell: msys2 {0}
+      run: |
+        make i1d3_hook64.dll
+    - name: artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: i1d3_hook64
+        # Directory containing files to upload
+        path: i1d3_hook64.dll
+  release:
+    runs-on: ubuntu-latest
+    needs: [build-i686, build-x86_64]
+    steps:
+    - name: Download i686 artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: i1d3_hook
+    - name: Download x86_64 artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: i1d3_hook64
+    - name: Create combined zip
+      run: |
+        zip -fz i1d3_hook.zip i1d3_hook.dll i1d3_hook64.dll
     - name: release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
